@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.Python
+
+# Виртуальное окружение
+venv/
+.venv/
+env/
+
+# Flask / базы данных
+instance/
+*.db
+*.sqlite3
+
+# Переменные окружения (секреты!)
+.env
+.env.*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db

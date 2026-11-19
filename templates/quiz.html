@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head><title>Тест: {{ game.title }}</title></head>
+<body>
+  <h1>Тест: какой ты персонаж из «{{ game.title }}»?</h1>
+  <form method="post">
+    {% for question in game.questions %}
+      <fieldset>
+        <legend>{{ question.text }}</legend>
+        {% for option in question.options %}
+          <label>
+            <input type="radio" name="q{{ question.id }}" value="{{ option.id }}" required>
+            {{ option.text }}
+          </label><br>
+        {% endfor %}
+      </fieldset>
+    {% endfor %}
+    <button type="submit">Узнать результат</button>
+  </form>
+</body>
+</html>

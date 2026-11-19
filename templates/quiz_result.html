@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head><title>Результат</title></head>
+<body>
+  <h1>Ваш персонаж — {{ character.name }}</h1>
+  <p>{{ character.description }}</p>
+  <h3>Баллы:</h3>
+  <ul>
+    {% for char_id, score in scores.items() %}
+      {% set ch = character.query.get(char_id) %} {# в реальном коде передайте список персонажей из маршрута #}
+      <li>{{ ch.name }}: {{ score }}</li>
+    {% endfor %}
+  </ul>
+  <a href="{{ url_for('game_detail', game_id=game.id) }}">Вернуться к игре</a>
+</body>
+</html>

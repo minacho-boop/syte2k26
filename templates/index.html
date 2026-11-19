@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head><title>Игры</title></head>
+<body>
+  <h1>Каталог игр</h1>
+  {% if current_user.is_authenticated %}
+    <p>Вы вошли как {{ current_user.username }} ({{ current_user.role }}) | <a href="{{ url_for('logout') }}">Выйти</a></p>
+    {% if current_user.role == 'admin' %}
+      <a href="{{ url_for('admin_users') }}">Управление пользователями</a>
+    {% endif %}
+  {% else %}
+    <a href="{{ url_for('login') }}">Вход</a> | <a href="{{ url_for('register') }}">Регистрация</a>
+  {% endif %}
+  <ul>
+    {% for game in games %}
+      <li>
+        <a href="{{ url_for('game_detail', game_id=game.id) }}">{{ game.title }}</a>
+        — {{ 'Завершена' if game.status == 'completed' else 'В разработке' }}
+      </li>
+    {% endfor %}
+  </ul>
+</body>
+</html>

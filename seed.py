@@ -19,10 +19,19 @@ def seed_data():
         # Создаем жанры
         rpg = Genre(name='RPG')
         adventure = Genre(name='Приключения')
-        db.session.add_all([rpg, adventure])
+        action = Genre(name='Экшн')
+        strategy = Genre(name='Стратегия')
+        simulator = Genre(name='Симулятор')
+        horror = Genre(name='Хоррор')
+        sandbox = Genre(name='Песочница')
+        puzzle = Genre(name='Головоломка')
+        stealth = Genre(name='Стелс')
+        quest = Genre(name='Квест')
+        
+        db.session.add_all([rpg, adventure, action, strategy, simulator, horror, sandbox, puzzle, stealth, quest])
 
         # Создаем авторов
-        author1 = Author(name='Иван Иванов', bio='Главный геймдизайнер')
+        author1 = Author(name='Capcom')
         author2 = Author(name='Петр Петров', bio='Сценарист')
         db.session.add_all([author1, author2])
         db.session.commit()
@@ -33,18 +42,19 @@ def seed_data():
             description='серия компьютерных игр в жанре квеста, созданная Сю Такуми[1] и изданная Capcom, в которой игроки примеряют на себя роль адвоката в вымышленном судебном сеттинге, основанном на японской системе расследований уголовных дел, чтобы добиться для своих клиентов вердикта «невиновен», при этом проводя расследования, изучая доказательства и устраивая перекрёстный допрос свидетелям.',
             status='completed',
             download_url='https://store.steampowered.com/curator/44969618-Ace-Attorney-Franchise/',
-            donate_url='https://example.com/donate'
+            donate_url=''
         )
         # Привязываем жанры и авторов
-        game1.genres.extend([rpg, adventure])
-        game1.authors.extend([author1, author2])
+        game1.genres.extend([rpg, quest])
+        game1.authors.extend([author1])
         db.session.add(game1)
         db.session.commit()
 
         # Создаем персонажей для игры
-        char1 = Character(game_id=game1.id, name='Рыцарь', description='Смелый и сильный воин.')
-        char2 = Character(game_id=game1.id, name='Маг', description='Умный и владеет магией.')
-        db.session.add_all([char1, char2])
+        char1 = Character(game_id=game1.id, name='Феникс Райт', description='Адвокат-ветеран, руководящий юридическим бюро «Агентство Райта по любым делам». В основном специализируется на уголовном судопроизводстве, и известен благодаря своему таланту «обзора дела под другим углом», что помогает ему выиграть те дела, которые многим казались заведомо проигрышными.')
+        char2 = Character(game_id=game1.id, name='Майа Фей', description='Майя энергичная, задорная, возбудимая и общительная девушка. Она излучает детскую индивидуальность, будучи одновременно импульсивно любопытной и легко сбиваемой с толку. Она часто действует не задумываясь, пытается без коснуться до любых предметов, что часто не имеет смысла. Мастер техники призыва духов деревни Курайн и, впоследствии, глава клана Фей. Близкий друг адвоката Феникса Райта, а также его главный помощник в течение большей части карьеры.')
+        char3 = Character(game_id=game1.id, name='Майлз Эджворт', description='Эджворт обычно спокоен и уравновешен, но считается снобом из-за своей холодной, безжалостной и в целом отчуждённой натуры. У него определённая нехватка социальных навыков и такта, что делает его очень неуверенным и неловким в окружении. Генеральный прокурор. В течение первых четырёх лет карьеры он добился идеального рекорда в судебных процессах, будучи готовыми сделать практически всё для получения обвинительного приговора. Его поражение в суде от руки его друга детства Феникса Райта послужило основой для пересмотра взглядов на его работу. ')
+        db.session.add_all([char1, char2, char3])
         db.session.commit()
 
         # Создаем тест
